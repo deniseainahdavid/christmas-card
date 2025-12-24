@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Christmas Card 2025</title>
+    <meta name="description" content="Merry Christmas 2025! 🎄">
+    <meta property="og:title" content="Christmas Card 2025">
+    <meta property="og:description" content="Merry Christmas 2025! 🎄✨">
+    <meta property="og:type" content="website">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 50%, #1a472a 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            touch-action: manipulation;
+        }
+
+        /* Snowflakes animation */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            opacity: 0.8;
+            animation: fall linear infinite;
+            user-select: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Envelope Container */
+        .envelope-container {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope-container:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope-container.opened {
+            pointer-events: none;
+            position: fixed;
+            width: 90vw;
+            height: 90vh;
+            max-width: 1200px;
+            max-height: 800px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        /* Envelope */
+        .envelope {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #c41e3a;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            background: #a01729;
+            clip-path: polygon(0 0, 50% 60%, 100% 0);
+            transform-origin: top center;
+            transition: transform 1s ease;
+            z-index: 3;
+        }
+
+        .envelope-container.opened .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .envelope-front {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            height: 50%;
+            background: #c41e3a;
+            border-radius: 0 0 5px 5px;
+        }
+
+        /* Seal */
+        .envelope-seal {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: #FFBD00;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 4;
+            transition: opacity 0.5s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .envelope-container.opened .envelope-seal {
+            opacity: 0;
+        }
+
+        /* Card inside envelope */
+        .card-wrapper {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            height: 70%;
+            transition: all 1.5s ease;
+            z-index: 2;
+        }
+
+        .envelope-container.opened .card-wrapper {
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Book Card */
+        .book-card {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+            perspective: 1500px;
+            opacity: 0;
+            transition: opacity 0.5s ease 1.5s;
+        }
+
+        .envelope-container.opened .book-card {
+            opacity: 1;
+        }
+
+        .book-pages {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backface-visibility: hidden;
+            transition: transform 0.8s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .page img {
+            max-width: 90%;
+            max-height: 85%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 20px;
+            font-size: 16px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Page flip animation */
+        .page.flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .page.hidden {
+            transform: rotateY(-180deg);
+            opacity: 0;
+        }
+
+        /* Navigation buttons */
+        .nav-buttons {
+            position: fixed;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .nav-buttons.show {
+            display: flex;
+        }
+
+        .nav-button {
+            padding: 12px 24px;
+            background: #c41e3a;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+            font-family: 'Georgia', serif;
+        }
+
+        .nav-button:hover {
+            background: #a01729;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(196, 30, 58, 0.4);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .click-instruction {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 18px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: pulse 2s infinite;
+            z-index: 5;
+        }
+
+        .envelope-container.opened ~ .click-instruction {
+            display: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .message {
+            text-align: center;
+            color: #2d5a3d;
+            font-size: 24px;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* Mobile Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .envelope-container {
+                width: 90vw;
+                max-width: 350px;
+                height: 250px;
+            }
+
+            .envelope-container.opened {
+                width: 95vw;
+                height: 85vh;
+                max-width: none;
+                max-height: none;
+            }
+
+            .card-wrapper {
+                width: 95%;
+                height: 75%;
+            }
+
+            .page {
+                padding: 20px;
+            }
+
+            .page img {
+                max-width: 95%;
+                max-height: 80%;
+            }
+
+            .message {
+                font-size: 18px;
+                margin-top: 10px;
+            }
+
+            .page-number {
+                font-size: 14px;
+                bottom: 15px;
+            }
+
+            .nav-buttons {
+                bottom: 20px;
+                gap: 15px;
+            }
+
+            .nav-button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .click-instruction {
+                font-size: 16px;
+                bottom: 10px;
+            }
+
+            .envelope-seal {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .snowflake {
+                font-size: 0.8em;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .envelope-container {
+                width: 85vw;
+                height: 200px;
+            }
+
+            .envelope-container.opened {
+                width: 98vw;
+                height: 90vh;
+            }
+
+            .page {
+                padding: 15px;
+            }
+
+            .page img {
+                max-width: 98%;
+                max-height: 75%;
+            }
+
+            .message {
+                font-size: 16px;
+                margin-top: 8px;
+            }
+
+            .page-number {
+                font-size: 12px;
+            }
+
+            .nav-buttons {
+                bottom: 15px;
+                gap: 10px;
+            }
+
+            .nav-button {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .click-instruction {
+                font-size: 14px;
+            }
+
+            .envelope-seal {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .nav-button {
+                min-height: 44px;
+                min-width: 100px;
+            }
+
+            .envelope-container {
+                -webkit-tap-highlight-color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Envelope and Card -->
+    <div class="envelope-container" id="envelope">
+        <div class="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-back"></div>
+            <div class="envelope-front"></div>
+            <div class="envelope-seal">🎄</div>
+        </div>
+        
+        <div class="card-wrapper">
+            <div class="book-card">
+                <div class="book-pages" id="bookPages">
+                    <div class="page" data-page="1">
+                        <img src="https://ik.imagekit.io/efr7zszjd/Bebi/1.png" alt="Page 1">
+                        <div class="message">Merry Christmas! 🎅</div>
+                        <div class="page-number">Page 1 of 3</div>
+                    </div>
+                    <div class="page" data-page="2">
+                        <img src="https://ik.imagekit.io/efr7zszjd/Bebi/2.png" alt="Page 2">
+                        <div class="message">Wishing you joy and happiness! ✨</div>
+                        <div class="page-number">Page 2 of 3</div>
+                    </div>
+                    <div class="page" data-page="3">
+                        <img src="https://ik.imagekit.io/efr7zszjd/Bebi/3.png" alt="Page 3">
+                        <div class="message">Happy Holidays! 🎁</div>
+                        <div class="page-number">Page 3 of 3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="click-instruction">Click to open! 💌</div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons" id="navButtons">
+        <button class="nav-button" id="prevBtn" disabled>← Previous</button>
+        <button class="nav-button" id="nextBtn">Next →</button>
+    </div>
+
+    <script>
+        // Snowflakes
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 5 + 's';
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            document.body.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 8000);
+        }
+
+        setInterval(createSnowflake, 200);
+
+        // Envelope and Card interaction
+        const envelope = document.getElementById('envelope');
+        const navButtons = document.getElementById('navButtons');
+        const pages = document.querySelectorAll('.page');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        let currentPage = 0;
+        let envelopeOpened = false;
+
+        // Handle both click and touch events
+        function openEnvelope() {
+            if (!envelopeOpened) {
+                envelope.classList.add('opened');
+                envelopeOpened = true;
+                
+                setTimeout(() => {
+                    navButtons.classList.add('show');
+                    updatePages();
+                }, 2000);
+            }
+        }
+
+        envelope.addEventListener('click', openEnvelope);
+        envelope.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            openEnvelope();
+        });
+
+        function updatePages() {
+            pages.forEach((page, index) => {
+                if (index < currentPage) {
+                    page.classList.add('hidden');
+                    page.classList.remove('flipped');
+                } else if (index === currentPage) {
+                    page.classList.remove('flipped', 'hidden');
+                } else {
+                    page.classList.add('flipped');
+                    page.classList.remove('hidden');
+                }
+            });
+
+            prevBtn.disabled = currentPage === 0;
+            nextBtn.disabled = currentPage === pages.length - 1;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                updatePages();
+            }
+        });
+
+        prevBtn.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            if (currentPage > 0) {
+                currentPage--;
+                updatePages();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < pages.length - 1) {
+                currentPage++;
+                updatePages();
+            }
+        });
+
+        nextBtn.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            if (currentPage < pages.length - 1) {
+                currentPage++;
+                updatePages();
+            }
+        });
+
+        // Initialize
+        updatePages();
+    </script>
+</body>
+</html>
